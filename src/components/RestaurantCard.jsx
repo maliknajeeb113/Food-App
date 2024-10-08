@@ -5,7 +5,7 @@ const RestaurantCard = (props) => {
   const { name, cuisines, cloudinaryImageId, avgRating, sla } = resData?.info;
 
   function truncatedStr(string) {
-    return string.length > 20 ? string.slice(0, 20) + "..." : string;
+    return string.length > 20 ? string.slice(0, 25) + "..." : string;
   }
 
   return (
@@ -14,7 +14,7 @@ const RestaurantCard = (props) => {
         src={CDN_URL + cloudinaryImageId}
         className="w-full max-h-40 object-cover shadow-inner rounded-t-2xl"
       />
-      <div className="px-4 pb-4">
+      <div className="px-4 pb-4 text-left">
         <div className="pt-3 text-xl">{truncatedStr(name)}</div>
         <div className="pt-3 text-sm ">{truncatedStr(cuisines.join(", "))}</div>
         <div className="pt-3 text-sm flex">

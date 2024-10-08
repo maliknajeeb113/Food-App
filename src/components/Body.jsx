@@ -25,15 +25,23 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(RESTAURANT_LIST);
-
     const json = await data.json();
+
+    console.log(json)
+
     //optional chaining
-    setRestaurantList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurantList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    try {
+      setRestaurantList(
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+      setFilteredRestaurantList(
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   if (useOfflineStatus())
@@ -79,15 +87,17 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-6 justify-center">
-        {filteredRestaurantList.map((restaurant) => (
-          <Link
-            key={restaurant.info.id}
-            to={"/restaurant/" + restaurant.info.id}
-          >
-            <RestaurantCard resData={restaurant} />
-          </Link>
-        ))}
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredRestaurantList.map((restaurant) => (
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurant/" + restaurant.info.id}
+            >
+              <RestaurantCard resData={restaurant} />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
