@@ -25,13 +25,14 @@ const RestaurantCard = (props) => {
   );
 };
 
+// Higher order component here
 
-
-export const WithPromotedLabel = (RestaurantCard) => {
+export const withPromotedLabel = (RestaurantCard) => {
     return (props) => {
       return(
         <div>
           <label>Promoted</label>
+          {/* didn't add css for this as Swiggy no longer has promoted label restaurants */}
           <RestaurantCard {...props}/>
         </div>
       )

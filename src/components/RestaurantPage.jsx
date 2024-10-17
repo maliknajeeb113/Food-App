@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantPage = () => {
+
   // const [resInfo, setResInfo] = useState(null);
 
   const { resId } = useParams();
@@ -20,17 +21,18 @@ const RestaurantPage = () => {
   //   );
   //   const json = await data.json();
   //   setResInfo(json);
-  //   // console.log(json)
   // };
+
 
   if (resInfo === null) return <Shimmer />;
 
-  // const name = resInfo?.data?.cards[0]?.card?.card?.info.name;
   const { name, cuisines, costForTwoMessage } =
     resInfo?.data?.cards[2]?.card?.card?.info;
   const { itemCards } =
     resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
       ?.card;
+
+    console.log(resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards)
 
   // console.log(itemCards)
 

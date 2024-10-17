@@ -1,4 +1,4 @@
-import RestaurantCard,{WithPromotedLabel} from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_LIST } from "../utils/configs";
@@ -8,10 +8,10 @@ import useOfflineStatus from "../utils/useOfflineStatus";
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredRestaurantList, setFilteredRestaurantList] = useState([]);
-  
+
   const [searchText, setSearchText] = useState("");
-  
-  const PromotedRestaurantCard = WithPromotedLabel(RestaurantCard)
+
+  const PromotedRestaurantCard = withPromotedLabel(RestaurantCard);
   // try {
   //   useEffect(() => {
   //     fetchData();
@@ -28,7 +28,7 @@ const Body = () => {
     const data = await fetch(RESTAURANT_LIST);
     const json = await data.json();
 
-    console.log(json)
+    console.log(json);
 
     //optional chaining
     try {
@@ -44,8 +44,6 @@ const Body = () => {
       console.log(e);
     }
   };
-
-
 
   if (useOfflineStatus())
     return <h1 className="text-center text-4xl">Looks like you are offline</h1>;
@@ -98,10 +96,12 @@ const Body = () => {
               to={"/restaurant/" + restaurant.info.id}
             >
               {
-
-                  restaurant?.data?.promoted?<PromotedRestaurantCard resData={restaurant}/>:<RestaurantCard resData={restaurant} />
-                  // The swiggy API no longer has promoted restaurants 
-
+                restaurant?.data?.promoted ? (
+                  <PromotedRestaurantCard resData={restaurant} />
+                ) : (
+                  <RestaurantCard resData={restaurant} />
+                )
+                // The swiggy API no longer has promoted restaurants
               }
             </Link>
           ))}
