@@ -32,13 +32,13 @@ const RestaurantPage = () => {
     resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
       ?.card;
 
-    console.log(resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards)
+    console.log(resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(c=> c.card?.['card']?.['@type'] == 'type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory'))
 
   // console.log(itemCards)
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1>{name}</h1>
+      <h1 className="text-2xl font-bold my-8">{name}</h1>
       <h2>{cuisines.join(", ")}</h2>
       <ul>
         <li>{costForTwoMessage}</li>
