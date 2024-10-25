@@ -28,7 +28,7 @@ const Body = () => {
     const data = await fetch(RESTAURANT_LIST);
     const json = await data.json();
 
-    console.log(json);
+    // console.log(json);
 
     //optional chaining
     try {
