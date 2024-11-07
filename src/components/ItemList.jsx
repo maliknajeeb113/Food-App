@@ -1,7 +1,7 @@
 import { CDN_URL } from "../utils/configs";
 
 const ItemList = ({ items }) => {
-  console.log(items);
+  // console.log(items);
 
   return (
     <div>

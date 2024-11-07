@@ -5,8 +5,9 @@ import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestuarantCategory from "./RestaurantCategory";
 
 const RestaurantPage = () => {
-
   // const [resInfo, setResInfo] = useState(null);
+
+  const [showIndex, setShowIndex] = useState(null);
 
   const { resId } = useParams();
 
@@ -15,7 +16,6 @@ const RestaurantPage = () => {
   // useEffect(() => {
   //   fetchMenu();
   // }, []);
-
   // const fetchMenu = async () => {
   //   const data = await fetch(
   //     RESTAURANT_PAGE+resId
@@ -23,7 +23,7 @@ const RestaurantPage = () => {
   //   const json = await data.json();
   //   setResInfo(json);
   // };
-
+  // moved to useRestaurantMenu.jsx
 
   if (resInfo === null) return <Shimmer />;
 
@@ -33,7 +33,12 @@ const RestaurantPage = () => {
     resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
       ?.card;
 
-  const categories = resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(c=> c.card?.['card']?.['@type'] == 'type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory')
+  const categories =
+    resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (c) =>
+        c.card?.["card"]?.["@type"] ==
+        "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+    );
 
   // console.log(categories)
 
@@ -41,27 +46,20 @@ const RestaurantPage = () => {
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-2xl font-bold my-8">{name}</h1>
       <h2 className="text-lg font-bold">{cuisines.join(", ")}</h2>
-      {/* <ul>
-        <li>{costForTwoMessage}</li>
-        <hr />
-        {itemCards?.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} - Rs.{" "}
-            {item.card.info.defaultPrice / 100 || item.card.info.price / 100}{" "}
-          </li>
-        ))}
-      </ul> */}
 
       {/* accordion categories */}
 
-      {categories.map((category)=>(<RestuarantCategory data={category?.card?.card}/>))}
+      {categories.map((category, index) => (
+        // controlled component
+        <RestuarantCategory
+          key={index}
+          data={category?.card?.card}
+          showItems={index == showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index === showIndex ? null : index)}
+        />
+      ))}
 
-
-
-{/* accordion categories end */}
-
-
-
+      {/* accordion categories end */}
     </div>
   );
 };
