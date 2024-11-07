@@ -30,7 +30,7 @@ class User extends React.Component {
       <div className="container flex mx-auto items-center justify-center flex-col">
         <div className="text-2xl">{name}</div>
         <div>
-          <img src={avatar_url} className="rounded-full size-12" />
+          <img src={avatar_url} className="rounded-full size-32" />
         </div>
       </div>
     );

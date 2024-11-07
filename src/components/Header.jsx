@@ -1,11 +1,13 @@
-import { useState } from "react";
-import burger from "../../src/assets/burger.png";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOfflineStatus from "../utils/useOfflineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const offlineStatus = useOfflineStatus();
+
+  const data = useContext(UserContext)
 
   return (
     <div className="container flex justify-between mx-auto p-5 border-b-2 items-center">
@@ -49,6 +51,9 @@ const Header = () => {
             >
               {btnName}
             </button>
+          </li>
+          <li>
+            {data.name}
           </li>
         </ul>
       </div>

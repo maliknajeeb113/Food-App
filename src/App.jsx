@@ -6,12 +6,14 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import RestaurantPage from "./components/RestaurantPage";
-import { lazy, Suspense } from "react";
-const Grocery = lazy(() => import("./components/Grocery"));
+import { lazy, Suspense, useState } from "react";
+const Grocery = lazy(() => import("./components/Grocery")); // lazy import : imported only if needed - need to use <Suspense><Suspense/> with it 
+
 
 function App() {
 
   return (
+
     <div className="">
       <Header />
       <Outlet />
@@ -44,7 +46,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "/grocery",
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={
+            
+          <div>Loading...</div>
+          }>
             <Grocery />
           </Suspense>
         ),
